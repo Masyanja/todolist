@@ -41,13 +41,13 @@ jobs:
         run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Update docker compose
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          TAG_NAME: ${{ steps.vars.outputs.tag }}
-        run: |
+         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+         TAG_NAME: ${{ steps.vars.outputs.tag }}
+         run: |
           envsubst '$DOCKERHUB_USERNAME,$TAG_NAME' < deploy/docker-compose.prod.yaml > deploy/docker-compose.yaml
           rm -f deploy/docker-compose.prod.yaml
-      - name: Copy on server
-        uses: appleboy/scp-action@master
+       - name: Copy on server
+         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -55,4 +55,3 @@ jobs:
           source: "deploy/*"
           target: "todolist"
           strip_components: 1
-
