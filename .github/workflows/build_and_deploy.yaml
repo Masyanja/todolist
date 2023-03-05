@@ -57,7 +57,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "todolist/*"
+          source: "deploy/*"
           target: "todolist"
           strip_components: 1
       - name: Run compose
